@@ -1,0 +1,11 @@
+<div id="title_bar"><div id="title">ART GALLERY</div></div>
+<div id="menu">
+    <a href="#" class="menu_text">Home</a>
+    <a href="#" class="menu_text">About</a>
+    <a href="#" class="menu_text">Profile</a>
+    <button class="menu_text" id="sign_up_button" (click)="openLogUpDialog()">Sign-up</button>
+
+</div>
+<div id="gallery_area">
+    <app-product-card *ngFor = "let product of products" [product_obj]="product"></app-product-card>
+</div>

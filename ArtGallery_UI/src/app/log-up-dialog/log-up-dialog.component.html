@@ -1,0 +1,92 @@
+<div id="dialog">
+    <div *ngIf="page[0]">
+        <button (click)="page[0]=false; page_login=true" class="log-up-button" style="top: 121px;">Login</button>
+        <button (click)="traverse(0,1)" class="log-up-button" style="top: 221px;">Sign-up</button>
+    </div>
+
+
+    <div *ngIf="page_login">
+        <input type="input" class="form__field" [(ngModel)]="login_userName" placeholder="User Name" required style="position: absolute; left: 20%; top: 20%;"/>
+        <input type="password" class="form__field"[(ngModel)]="login_password" placeholder="Password" required style="position: absolute; left: 20%; top: 40%;"/>
+        <button class="log-up-button" style="top: 55%;">Log-in</button>
+        <button (click)="page[0]=true; page_login=false" class="nav-button" style="position: absolute; left: 40%; top: 80%;">< Back</button>
+    </div>
+
+    <!--sign up form-->
+    <form [formGroup]="heroForm" #formDir="ngForm">
+
+      <!-- Sign Up page-1 -->
+      <div id="page-1" *ngIf="page[1]" class="container">
+        <!--First Name-->
+        <div class="form-field"  style="margin-top: 10%">
+          <label for="first_name">First Name</label>
+          <input id="first_name" class="form-control" [(ngModel)]="hero.first_name"
+                formControlName="first_name" required autocomplete="off">
+        <!--First Name-Validation-->
+          <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)"
+              class="alert alert-danger">
+
+              <div *ngIf="first_name.errors.required">
+                Name is required.
+              </div>
+              <div *ngIf="first_name.errors.minlength">
+                Name must be at least 4 characters long.
+              </div>
+              <div *ngIf="first_name.errors.forbiddenName">
+                Name cannot be Bob.
+              </div>
+          </div>
+        </div>
+
+
+        <!--Last Name-->
+        <div class="form-field">
+          <label for="last_name">Last Name</label>
+          <input id="last_name" class="form-control" [(ngModel)]="hero.last_name"
+                formControlName="last_name" required autocomplete="off">
+        <!--Last Name-Validation-->
+          <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)"
+              class="alert alert-danger">
+
+              <div *ngIf="last_name.errors.required">
+                Name is required.
+              </div>
+              <div *ngIf="last_name.errors.minlength">
+                Name must be at least 4 characters long.
+              </div>
+              <div *ngIf="last_name.errors.forbiddenName">
+                Name cannot be Bob.
+              </div>
+          </div>
+        </div>
+          
+      
+        <br>
+        <!--<button type="submit" class="btn btn-default"
+                [disabled]="heroForm.invalid">Submit</button>
+        <button type="button" class="btn btn-default"
+                (click)="formDir.resetForm({})">Reset</button>-->
+        <button (click)="traverse(1,-1)" class="back-button">< Back</button>
+        <button (click)="traverse(1,1)" [disabled]="first_name.invalid || last_name.invalid" class="next-button">Next ></button>
+      </div>
+      
+          
+
+
+    <div *ngIf="page[2]">
+        <input type="input" class="form__field"  placeholder="Email Address" required style="position: absolute; left: 20%; top: 20%;"/>
+        <input type="input" class="form__field" placeholder="Contact Number" required style="position: absolute; left: 20%; top: 40%;"/>
+        <button (click)="traverse(2,-1)" class="back-button" >< Back</button>
+        <button (click)="traverse(2,1)" class="next-button" >Next ></button>
+    </div>
+    <div *ngIf="page[3]">
+        <input type="input" class="form__field"  placeholder="Enter password" required style="position: absolute; left: 20%; top: 20%;"/>
+        <input type="input" class="form__field" placeholder="Confirm password" required style="position: absolute; left: 20%; top: 40%;"/>
+        <button (click)="traverse(3,-1)" class="back-button" >< Back</button>
+    </div>
+  </form>  
+
+
+    <!--navigation buttons-->
+    
+</div>

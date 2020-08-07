@@ -1,0 +1,80 @@
+
+#title_bar {
+    position: absolute;
+    width: 1535px;
+    height: 40px;
+    left: 0px;
+    top: 4px;
+
+    background: #4AC9BA;
+}
+
+#title{
+    position: absolute;
+    width: 332px;
+    height: 40px;
+    left: 599px;
+    top: 0px;
+
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 42px;
+    text-align: center;
+
+    color: #000000;
+
+}
+
+#menu {
+    position: absolute;
+    width: 1479px;
+    height: 36px;
+    left: 24px;
+    top: 58px;
+    padding-top: 10px ;
+
+    background: #FFFFFF;
+    box-shadow: 0px 0px 12px 5px rgba(0, 0, 0, 0.17);
+}
+
+#gallery_area {
+    position: absolute;
+    width: 1473px;
+    left: 30px;
+    top: 121px;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+
+    background: #E7E8E9;
+    box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+}
+
+.menu_text{
+    margin-left: 20px;
+    font-family: Questrial;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 15px;
+}
+
+#sign_up_button{
+
+    width: 95px;
+    height: 28px;
+    float: right;
+    border: none;
+
+    margin-right: 20px;
+    font-family: Questrial;
+    font-style: normal;
+    color: white;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 15px;
+
+    background: #208AED;
+}
+
