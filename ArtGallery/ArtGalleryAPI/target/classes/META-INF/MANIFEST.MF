@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: ArtGalleryAPI
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: debparna
+Implementation-Vendor-Id: org.art-gallery.api
+Build-Jdk: 1.8.0_261
+Implementation-URL: http://projects.spring.io/spring-boot/ArtGalleryAP
+ I/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
