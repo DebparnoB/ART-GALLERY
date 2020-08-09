@@ -80,7 +80,7 @@
                 (click)="formDir.resetForm({})">Reset</button>-->
         <!---Back | Next-->
         <button *ngIf="page[1]" (click)="traverse(1,-1)" class="back-button">< Back</button>
-        <button *ngIf="page[1]" (click)="traverse(1,1)" [disabled]="first_name.invalid || last_name.invalid" class="next-button">Next ></button>
+        <button *ngIf="page[1]" (click)="traverse(1,1)" [disabled]="(first_name.invalid || last_name.invalid)" class="next-button">Next ></button>
       </div>      
           
 
@@ -236,7 +236,8 @@
               Contact Number can only contain numbers.
             </div>
         </div>  
-        <button  class="side-button">Confirm Number</button>        
+        <button  class="side-button">Confirm Number</button> 
+               
       </div>
       <br>
       <!--<button type="submit" class="btn btn-default"
@@ -245,19 +246,25 @@
               (click)="formDir.resetForm({})">Reset</button>-->
       <!---Back | Next-->
       <button *ngIf="page[3]" (click)="traverse(3,-1)" class="back-button">< Back</button>
-      <button *ngIf="page[3]" (click)="traverse(3,1)" [disabled]="email.invalid || cont_number.invalid" class="next-button">Next ></button>
+      <button *ngIf="page[3]" (click)="traverse(3,1)" [disabled]="(email.invalid || cont_number.invalid)" class="next-button">Next ></button>
     </div>  
 
 
 
     <div *ngIf="page[4]">
-        <input type="input" class="form-control"  placeholder="Enter password" required style="position: absolute; left: 20%; top: 20%;"/>
-        <input type="input" class="form-control" placeholder="Confirm password" required style="position: absolute; left: 20%; top: 40%;"/>
-        <button (click)="traverse(4,-1)" class="back-button" >< Back</button>
+        <label for="password" class="form-label">*Contact Number</label>
+        <input type="password" id="password" class="form-control" [(ngModel)]="user.password"
+              formControlName="password" required autocomplete="off"  style="position: absolute; left: 20%; top: 20%;">
+        <input type="input" class="form-control" placeholder="Confirm password" required style="position: absolute; left: 20%; top: 40%;"/>    
+        <button  class="side-button" (click)="onSubmit(); traverse(4,1)" style="position: absolute; left:38%; top:60%">Submit</button>      
+        <button (click)="traverse(4,-1)" class="back-button" style="left: 40%;">< Back</button>
     </div>
-  </form>  
 
 
-  
+    <div *ngIf="page[5]">
+      <div *ngIf="!account_create_success" style="position: absolute; left: 35%; top: 45%;">Account Creating</div>
+      <div *ngIf="account_create_success" style="position: absolute; left: 35%; top: 45%;">Account Created successfully!!</div>
+    </div>
+  </form>    
     
 </div>

@@ -7,7 +7,7 @@ import { Product } from './product-card/product';
   providedIn: 'root'
 })
 export class ProductServiceService {
-  private apiUrl = '/api/product'
+  private apiUrl = '/api/product';
 
   constructor(private http: HttpClient) { }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { forbiddenNameValidator } from './forbidden-name.directive';
+import { User } from '../Classes/user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-log-up-dialog',
@@ -9,16 +11,21 @@ import { forbiddenNameValidator } from './forbidden-name.directive';
 })
 export class LogUpDialogComponent implements OnInit {
  
-  user = { first_name: '',middle_name:'',last_name: '',country: '',state: '',address: '',pin_code: '',city: '',email: '', cont_number:''};
+
+  user: User = new User();
+  //user1 = { first_name: '',middle_name:'',last_name: '',country: '',state: '',address: '',pin_code: '',city: '',email: '', cont_number:''};
 
   signUpForm: FormGroup;
 
   login_userName: string = "";
   login_password: string = "";
 
-  page: boolean[] = [true, false, false, false, false];
+  page: boolean[] = [true, false, false, false, false, false];
   page_login: boolean = false;
-  constructor() { }
+
+  account_create_success: boolean = false;
+
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -66,10 +73,15 @@ export class LogUpDialogComponent implements OnInit {
       ]),      
       cont_number: new FormControl(this.user.cont_number, [
         Validators.required,
-        Validators.minLength(10),
+        Validators.minLength(4),
         Validators.pattern('[0-9]*')
-      ])  
+      ]),      
+      password: new FormControl(this.user.password) 
     }); // <-- add custom validator at the FormGroup level
+  }
+
+  onSubmit(){
+    this.userService.addUser(this.user).subscribe(data => {this.account_create_success = data});
   }
 
   get first_name() { return this.signUpForm.get('first_name'); }
@@ -82,6 +94,7 @@ export class LogUpDialogComponent implements OnInit {
   get pin_code() { return this.signUpForm.get('pin_code'); }
   get email() { return this.signUpForm.get('email'); }
   get cont_number() { return this.signUpForm.get('cont_number'); }
+  get password() { return this.signUpForm.get('password'); }
 
   traverse(index: number, direction: number){
     this.page[index] = false;

@@ -12,6 +12,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForbiddenValidatorDirective } from './log-up-dialog/forbidden-name.directive';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ForbiddenValidatorDirective } from './log-up-dialog/forbidden-name.dire
     ReactiveFormsModule
   ],
   providers: [
-    ProductServiceService
+    ProductServiceService,
+    UserService
   ],
   bootstrap: [AppComponent],
   entryComponents: [LogUpDialogComponent],
