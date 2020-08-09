@@ -6,87 +6,258 @@
 
 
     <div *ngIf="page_login">
-        <input type="input" class="form__field" [(ngModel)]="login_userName" placeholder="User Name" required style="position: absolute; left: 20%; top: 20%;"/>
-        <input type="password" class="form__field"[(ngModel)]="login_password" placeholder="Password" required style="position: absolute; left: 20%; top: 40%;"/>
+        <input type="input" class="form-control" [(ngModel)]="login_userName" placeholder="User Name" required style="position: absolute; left: 20%; top: 20%;"/>
+        <input type="password" class="form-control"[(ngModel)]="login_password" placeholder="Password" required style="position: absolute; left: 20%; top: 40%;"/>
         <button class="log-up-button" style="top: 55%;">Log-in</button>
         <button (click)="page[0]=true; page_login=false" class="nav-button" style="position: absolute; left: 40%; top: 80%;">< Back</button>
     </div>
 
     <!--sign up form-->
-    <form [formGroup]="heroForm" #formDir="ngForm">
+    <form [formGroup]="signUpForm" #formDir="ngForm">
 
-      <!-- Sign Up page-1 -->
+
+      <!-- Sign Up PAGE-1 -->
       <div id="page-1" *ngIf="page[1]" class="container">
         <!--First Name-->
         <div class="form-field"  style="margin-top: 10%">
-          <label for="first_name">First Name</label>
-          <input id="first_name" class="form-control" [(ngModel)]="hero.first_name"
+          <label for="first_name" class="form-label">*First Name</label>
+          <input id="first_name" class="form-control" [(ngModel)]="user.first_name"
                 formControlName="first_name" required autocomplete="off">
         <!--First Name-Validation-->
           <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)"
               class="alert alert-danger">
 
-              <div *ngIf="first_name.errors.required">
-                Name is required.
+              <div *ngIf="first_name.errors.required" class="validation_text">
+                First Name is required.
               </div>
-              <div *ngIf="first_name.errors.minlength">
-                Name must be at least 4 characters long.
+              <div *ngIf="first_name.errors.pattern" class="validation_text">
+                First Name cannot contain numbers or special characters.
+              </div>
+              <!--<div *ngIf="first_name.errors.minlength">
+                First Name must be at least 4 characters long.
               </div>
               <div *ngIf="first_name.errors.forbiddenName">
-                Name cannot be Bob.
-              </div>
+                First Name cannot be Bob.
+              </div>-->
           </div>
         </div>
 
+        <!--Middle Name-->
+        <div class="form-field">
+          <label for="middle_name" class="form-label">Middle Name</label>
+          <input id="middle_name" class="form-control" [(ngModel)]="user.middle_name"
+                formControlName="middle_name" autocomplete="off">
+        <!--Middle Name-Validation-->  
+        <div *ngIf="middle_name.invalid && (middle_name.dirty || middle_name.touched)"
+              class="alert alert-danger">
+              <div *ngIf="middle_name.errors.pattern" class="validation_text">
+                Middle Name cannot contain numbers or special characters.
+              </div>
+          </div>         
+        </div>
 
         <!--Last Name-->
         <div class="form-field">
-          <label for="last_name">Last Name</label>
-          <input id="last_name" class="form-control" [(ngModel)]="hero.last_name"
+          <label for="last_name" class="form-label">*Last Name</label>
+          <input id="last_name" class="form-control" [(ngModel)]="user.last_name"
                 formControlName="last_name" required autocomplete="off">
         <!--Last Name-Validation-->
           <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)"
               class="alert alert-danger">
 
-              <div *ngIf="last_name.errors.required">
-                Name is required.
+              <div *ngIf="last_name.errors.required" class="validation_text">
+                Last Name is required.
               </div>
-              <div *ngIf="last_name.errors.minlength">
-                Name must be at least 4 characters long.
+              <div *ngIf="last_name.errors.pattern" class="validation_text">
+                Last Name cannot contain numbers or special characters.
               </div>
-              <div *ngIf="last_name.errors.forbiddenName">
-                Name cannot be Bob.
-              </div>
-          </div>
+          </div>          
         </div>
-          
-      
         <br>
         <!--<button type="submit" class="btn btn-default"
                 [disabled]="heroForm.invalid">Submit</button>
         <button type="button" class="btn btn-default"
                 (click)="formDir.resetForm({})">Reset</button>-->
-        <button (click)="traverse(1,-1)" class="back-button">< Back</button>
-        <button (click)="traverse(1,1)" [disabled]="first_name.invalid || last_name.invalid" class="next-button">Next ></button>
-      </div>
-      
+        <!---Back | Next-->
+        <button *ngIf="page[1]" (click)="traverse(1,-1)" class="back-button">< Back</button>
+        <button *ngIf="page[1]" (click)="traverse(1,1)" [disabled]="first_name.invalid || last_name.invalid" class="next-button">Next ></button>
+      </div>      
           
 
 
-    <div *ngIf="page[2]">
-        <input type="input" class="form__field"  placeholder="Email Address" required style="position: absolute; left: 20%; top: 20%;"/>
-        <input type="input" class="form__field" placeholder="Contact Number" required style="position: absolute; left: 20%; top: 40%;"/>
-        <button (click)="traverse(2,-1)" class="back-button" >< Back</button>
-        <button (click)="traverse(2,1)" class="next-button" >Next ></button>
-    </div>
-    <div *ngIf="page[3]">
-        <input type="input" class="form__field"  placeholder="Enter password" required style="position: absolute; left: 20%; top: 20%;"/>
-        <input type="input" class="form__field" placeholder="Confirm password" required style="position: absolute; left: 20%; top: 40%;"/>
-        <button (click)="traverse(3,-1)" class="back-button" >< Back</button>
+     <!-- Sign Up PAGE-2 -->
+     <div *ngIf="page[2]">
+
+       <!--Country-->
+      <div class="form-field-double" style="margin-top: 5%;">
+        <label for="country" class="form-label">*Country</label> 
+        <input id="country" class="form-control-double" [(ngModel)]="user.country"
+              formControlName="country" required autocomplete="off">
+        <!--Country Validation-->
+        <div *ngIf="country.invalid && (country.dirty || country.touched)"
+              class="alert alert-danger">  
+            <div *ngIf="country.errors.required" class="validation_text">
+              Country is required.
+            </div>
+            <div *ngIf="country.errors.minlength" class="validation_text">
+              Country should be 2 characters long.
+            </div>
+            <div *ngIf="country.errors.pattern" class="validation_text">
+              Country cannot contain numbers or special characters.
+            </div>
+        </div>        
+      </div>
+
+      <!--State-->
+      <div class="form-field-double" style="margin-top: 5%;">
+        <label for="state" class="form-label">*State</label>
+        <input id="state" class="form-control-double" [(ngModel)]="user.state"
+              formControlName="state" required autocomplete="off">
+        <!--State Validation-->
+        <div *ngIf="state.invalid && (state.dirty || state.touched)"
+              class="alert alert-danger">  
+            <div *ngIf="state.errors.required" class="validation_text">
+              State is required.
+            </div>
+            <div *ngIf="state.errors.minlength" class="validation_text">
+              State should be 2 characters long.
+            </div>
+            <div *ngIf="state.errors.pattern" class="validation_text">
+              State cannot contain numbers or special characters.
+            </div>
+        </div> 
+      </div>
+
+      <!--Address-->
+      <div class="form-field-big">
+        <label for="address" class="form-label">*Address</label>
+        <input id="address" class="form-control-double" [(ngModel)]="user.address"
+              formControlName="address" required autocomplete="off">     
+        <!--Address Validation-->
+        <div *ngIf="address.invalid && (address.dirty || address.touched)"
+              class="alert alert-danger">  
+            <div *ngIf="address.errors.required" class="validation_text">
+              Address is required.
+            </div>            
+        </div>    
+      </div>
+
+      <!--City-->
+      <div class="form-field-double">
+        <label for="city" class="form-label">*City</label>
+        <input id="city" class="form-control-double" [(ngModel)]="user.city"
+              formControlName="city" required autocomplete="off">
+        <!--City Validation-->
+        <div *ngIf="city.invalid && (city.dirty || city.touched)"
+              class="alert alert-danger">  
+            <div *ngIf="city.errors.required" class="validation_text">
+              City is required.
+            </div>
+            <div *ngIf="city.errors.minlength" class="validation_text">
+              City should be 2 characters long.
+            </div>
+            <div *ngIf="city.errors.pattern" class="validation_text">
+              City cannot contain numbers or special characters.
+            </div>
+        </div> 
+      </div>
+
+      <!--Pin Code-->
+      <div class="form-field-double">
+        <label for="state" class="form-label">*Pin Code</label>
+        <input id="state" class="form-control-double" [(ngModel)]="user.pin_code"
+              formControlName="pin_code" required autocomplete="off">
+        <!--Pin Code Validation-->
+        <div *ngIf="pin_code.invalid && (pin_code.dirty || pin_code.touched)"
+            class="alert alert-danger">
+          <div *ngIf="pin_code.errors.required" class="validation_text">
+            Pin Code is required.
+          </div>
+          <div *ngIf="pin_code.errors.minlength" class="validation_text">
+            Pin Code should be 6 characters long.
+          </div>
+          <div *ngIf="pin_code.errors.pattern" class="validation_text">
+            Pin Code can only contain numbers.
+          </div>
+        </div>         
+      </div>
+
+      <!---Back | Next-->
+        <div class="form-field-big" style="margin-top: 5%;">
+        <button *ngIf="page[2]" (click)="traverse(2,-1)" class="back-button">< Back</button>
+        <button *ngIf="page[2]" (click)="traverse(2,1)" 
+            [disabled]="(country.invalid || state.invalid || address.invalid || city.invalid || pin_code.invalid)" class="next-button">Next ></button>
+      </div>
+     </div>
+
+     <!-- Sign Up PAGE-3 -->
+     <div id="page-3" *ngIf="page[3]" class="container">
+      <!--Email-->
+      <div class="form-field"  style="margin-top: 10%">
+        <label for="email" class="form-label">*Email</label>
+        <input id="email" class="form-control" [(ngModel)]="user.email"
+              formControlName="email" required autocomplete="off">
+      <!--Email-Validation-->
+        <div *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="email.errors.required" class="validation_text">
+              Email is required.
+            </div>
+            <div *ngIf="email.errors.pattern" class="validation_text">
+              Doesn't match email format
+            </div>
+            <!--<div *ngIf="first_name.errors.minlength">
+              First Name must be at least 4 characters long.
+            </div>
+            <div *ngIf="first_name.errors.forbiddenName">
+              First Name cannot be Bob.
+            </div>-->
+        </div>
+        <button  class="side-button">Confirm Email</button>
+      </div>
+
+      <!--Contact Number-->
+      <div class="form-field">
+        <label for="cont_number" class="form-label">*Contact Number</label>
+        <input id="cont_number" class="form-control" [(ngModel)]="user.cont_number"
+              formControlName="cont_number" required autocomplete="off">
+      <!--Contact Number-Validation-->
+        <div *ngIf="cont_number.invalid && (cont_number.dirty || cont_number.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="cont_number.errors.required" class="validation_text">
+              Contact Number is required.
+            </div>
+            <div *ngIf="cont_number.errors.minlength" class="validation_text">
+              Must be of 10 digits long.
+            </div>
+            <div *ngIf="cont_number.errors.pattern" class="validation_text">
+              Contact Number can only contain numbers.
+            </div>
+        </div>  
+        <button  class="side-button">Confirm Number</button>        
+      </div>
+      <br>
+      <!--<button type="submit" class="btn btn-default"
+              [disabled]="heroForm.invalid">Submit</button>
+      <button type="button" class="btn btn-default"
+              (click)="formDir.resetForm({})">Reset</button>-->
+      <!---Back | Next-->
+      <button *ngIf="page[3]" (click)="traverse(3,-1)" class="back-button">< Back</button>
+      <button *ngIf="page[3]" (click)="traverse(3,1)" [disabled]="email.invalid || cont_number.invalid" class="next-button">Next ></button>
+    </div>  
+
+
+
+    <div *ngIf="page[4]">
+        <input type="input" class="form-control"  placeholder="Enter password" required style="position: absolute; left: 20%; top: 20%;"/>
+        <input type="input" class="form-control" placeholder="Confirm password" required style="position: absolute; left: 20%; top: 40%;"/>
+        <button (click)="traverse(4,-1)" class="back-button" >< Back</button>
     </div>
   </form>  
 
 
-    <!--navigation buttons-->
+  
     
 </div>
