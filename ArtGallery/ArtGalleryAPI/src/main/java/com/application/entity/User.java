@@ -1,17 +1,60 @@
 package com.application.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "AG_USERS", schema = "SYSTEM")
 public class User {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "USER_ID")
+	private int user_id;
+	
+	@Column(name = "FIRST_NAME")
 	private String first_name;
+	
+	@Column(name = "MIDDLE_NAME")
 	private String middle_name;
+	
+	@Column(name = "LAST_NAME")
 	private String last_name;
+	
+	@Column(name = "COUNTRY")
 	private String country;
+	
+	@Column(name = "STATE")
 	private String state;
+	
+	@Column(name = "ADDRESS")
 	private String address;
+	
+	@Column(name = "CITY")
 	private String city;
+	
+	@Column(name = "PIN_CODE")
 	private int pin_code;
+	
+	@Column(name = "EMAIL")
 	private String email;
+	
+	@Column(name = "CONTACT_NUMBER")
 	private long cont_number;
+	
+	@Column(name = "PASSWORD")
 	private String password;
+	
+	public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
 	public String getFirst_name() {
 		return first_name;
 	}
@@ -69,7 +112,7 @@ public class User {
 	public long getCont_number() {
 		return cont_number;
 	}
-	public void setCont_number(int cont_number) {
+	public void setCont_number(long cont_number) {
 		this.cont_number = cont_number;
 	}
 	public String getPassword() {
@@ -77,8 +120,5 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	
-	
-	
+	}	
 }

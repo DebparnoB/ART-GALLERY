@@ -12,6 +12,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   addUser(user: User): Observable<boolean> {
+    user.user_id = 0;
     return this.http.post<boolean>(this.apiUrl+"/addUser",user);
   }
 }

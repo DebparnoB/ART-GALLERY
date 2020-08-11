@@ -17,7 +17,7 @@
 
 
       <!-- Sign Up PAGE-1 -->
-      <div id="page-1" *ngIf="page[1]" class="container">
+      <div id="page-1" *ngIf="page[1]" class="container">  
         <!--First Name-->
         <div class="form-field"  style="margin-top: 10%">
           <label for="first_name" class="form-label">*First Name</label>
@@ -252,7 +252,7 @@
 
 
     <div *ngIf="page[4]">
-        <label for="password" class="form-label">*Contact Number</label>
+        <label for="password" class="form-label" style="position: absolute; left: 20%; top: 15%;">*Password</label>
         <input type="password" id="password" class="form-control" [(ngModel)]="user.password"
               formControlName="password" required autocomplete="off"  style="position: absolute; left: 20%; top: 20%;">
         <input type="input" class="form-control" placeholder="Confirm password" required style="position: absolute; left: 20%; top: 40%;"/>    

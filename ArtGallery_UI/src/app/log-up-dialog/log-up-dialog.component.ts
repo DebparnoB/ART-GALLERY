@@ -32,9 +32,7 @@ export class LogUpDialogComponent implements OnInit {
       //page1
       first_name: new FormControl(this.user.first_name, [
         Validators.required,
-        Validators.pattern('[A-Za-z]*'),
-        //Validators.minLength(4),
-        //forbiddenNameValidator(/bob/i)
+        Validators.pattern('[A-Za-z]*')
       ]),
       middle_name: new FormControl(this.user.middle_name,[
         Validators.pattern('[A-Za-z]*')
@@ -43,7 +41,7 @@ export class LogUpDialogComponent implements OnInit {
         Validators.required,
         Validators.pattern('[A-Za-z]*')
       ]),  
-      //page2    
+      //page2
       country: new FormControl(this.user.country, [
         Validators.required,
         Validators.minLength(2),
@@ -69,11 +67,11 @@ export class LogUpDialogComponent implements OnInit {
       ]),      
       email: new FormControl(this.user.email, [
         Validators.required,
-        Validators.pattern('[A-Za-z]*')
+        Validators.pattern('[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})')
       ]),      
       cont_number: new FormControl(this.user.cont_number, [
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(10),
         Validators.pattern('[0-9]*')
       ]),      
       password: new FormControl(this.user.password) 
