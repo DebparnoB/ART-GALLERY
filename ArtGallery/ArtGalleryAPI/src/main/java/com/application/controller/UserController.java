@@ -2,6 +2,8 @@ package com.application.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +22,7 @@ public class UserController {
 	UserService userService;
 	
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public boolean addUser(@RequestBody User user) {
+	public boolean addUser(@RequestBody User user, HttpSession session) {
 		try {
 			User saving_user = new User();
 			saving_user.setFirst_name(user.getFirst_name());

@@ -3,7 +3,6 @@ import { ProductServiceService } from '../product-service.service';
 import { Product } from '../product-card/product';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { LogUpDialogComponent } from '../log-up-dialog/log-up-dialog.component';
-import { GlobalConstants } from '../Common/global-constants';
 
 @Component({
   selector: 'app-homepage',
@@ -12,25 +11,30 @@ import { GlobalConstants } from '../Common/global-constants';
 })
 export class HomepageComponent implements OnInit {
 
-  sessionExist: boolean;
-  sessionID: number;
-  sessionUser: string;
+  loginStatus: boolean;
+  loginID: number;
+  loginUser: string;
 
   products: Product[];
-  constructor(private productService: ProductServiceService, private dialog: MatDialog) {      
+  constructor(private productService: ProductServiceService, private dialog: MatDialog) {  
    }
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe(data => {
       this.products = data;
-    }); 
-    this.sessionExist = GlobalConstants.sessionExist;
-    this.sessionID = GlobalConstants.sessionUserID;
-    this.sessionUser = GlobalConstants.sessionUserName;       
+    });         
   }
 
   openLogUpDialog() {
     this.dialog.open(LogUpDialogComponent);
+  }
+  validate(): boolean{
+    this.loginStatus = JSON.parse(localStorage.getItem("logInStatus"));
+    if(this.loginStatus){
+      this.loginID = JSON.parse(localStorage.getItem("loginID"));
+      this.loginUser = localStorage.getItem("loginUser");
+    }    
+    return this.loginStatus;
   }
 
 }

@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ArtGalleryApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ArtGalleryApp.class, args);  
+		SpringApplication.run(ArtGalleryApp.class, args);
 	}
 }

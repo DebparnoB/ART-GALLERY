@@ -79,7 +79,13 @@ export class LogUpDialogComponent implements OnInit {
   }
 
   onSubmit(){
-    this.userService.addUser(this.user).subscribe(data => {this.account_create_success = data});
+    this.userService.addUser(this.user).subscribe(data => {
+      this.account_create_success = data;
+      if(data){
+        localStorage.setItem("logInStatus","true");
+        localStorage.setUser("loginUser",this.user.first_name);
+      }
+    });
   }
 
   get first_name() { return this.signUpForm.get('first_name'); }
