@@ -83,7 +83,7 @@ export class LogUpDialogComponent implements OnInit {
       this.account_create_success = data;
       if(data){
         localStorage.setItem("logInStatus","true");
-        localStorage.setUser("loginUser",this.user.first_name);
+        localStorage.setItem("logInUser",this.user.first_name);
       }
     });
   }
