@@ -31,7 +31,6 @@ export class HomepageComponent implements OnInit {
   validate(): boolean{
     this.loginStatus = JSON.parse(localStorage.getItem("logInStatus"));
     if(this.loginStatus){
-      //this.loginID = JSON.parse(localStorage.getItem("logInID"));
       this.loginUser = localStorage.getItem("logInUser");
     }    
     return this.loginStatus;

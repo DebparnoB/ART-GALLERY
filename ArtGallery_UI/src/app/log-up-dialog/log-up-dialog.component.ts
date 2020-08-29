@@ -80,10 +80,10 @@ export class LogUpDialogComponent implements OnInit {
 
   onSubmit(){
     this.userService.addUser(this.user).subscribe(data => {
-      this.account_create_success = data;
-      if(data){
+      if(data != null){
         localStorage.setItem("logInStatus","true");
-        localStorage.setItem("logInUser",this.user.first_name);
+        localStorage.setItem("logInUser",data.first_name);
+        this.account_create_success = true;
       }
     });
   }

@@ -30,5 +30,10 @@ public class UserService {
 	public User getUserById(int id) {
 		return userRepository.findOne(id);
 	}
+	
+	@Transactional
+	public User getUserByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 
 }

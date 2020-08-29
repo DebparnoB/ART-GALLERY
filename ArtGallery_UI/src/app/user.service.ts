@@ -11,8 +11,12 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  addUser(user: User): Observable<boolean> {
+  addUser(user: User): Observable<User> {
     user.user_id = 0;
-    return this.http.post<boolean>(this.apiUrl+"/addUser",user);
+    return this.http.post<User>(this.apiUrl+"/addUser",user);
+  }
+
+  logIn(userEmail: string, userPassword: string): Observable<User> {
+    return this.http.post<User>(this.apiUrl+"/addUser?userEmail="+userEmail+"&userPassword="+userPassword, null);
   }
 }

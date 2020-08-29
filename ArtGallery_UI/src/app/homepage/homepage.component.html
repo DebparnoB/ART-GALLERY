@@ -2,9 +2,10 @@
 <div id="menu">
     <a href="#" class="menu_text">Home</a>
     <a href="#" class="menu_text">About</a>
-    <a href="#" class="menu_text">Profile</a>
+    <a *ngIf="validate()" href="#" class="menu_text">Profile</a>
     <a *ngIf="validate()" class="menu_text">Welcome {{loginUser}} !!</a>
-    <button class="menu_text" id="sign_up_button" (click)="openLogUpDialog()">Sign-up</button>
+    <button *ngIf="!validate()" class="menu_text menu_button" id="sign_up_button" (click)="openLogUpDialog()">Account</button>
+    <button *ngIf="validate()" class="menu_text menu_button">Log Out</button>
 
 </div>
 <div id="gallery_area">
