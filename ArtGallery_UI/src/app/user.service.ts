@@ -17,6 +17,10 @@ export class UserService {
   }
 
   logIn(userEmail: string, userPassword: string): Observable<User> {
-    return this.http.post<User>(this.apiUrl+"/addUser?userEmail="+userEmail+"&userPassword="+userPassword, null);
+    return this.http.post<User>(this.apiUrl+"/logIn?userEmail="+userEmail+"&userPassword="+userPassword, null);
+  }
+
+  logOut(): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl+"/logOut", null);
   }
 }

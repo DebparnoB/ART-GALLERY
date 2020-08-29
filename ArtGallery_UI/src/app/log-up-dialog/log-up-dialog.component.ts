@@ -16,18 +16,32 @@ export class LogUpDialogComponent implements OnInit {
   //user1 = { first_name: '',middle_name:'',last_name: '',country: '',state: '',address: '',pin_code: '',city: '',email: '', cont_number:''};
 
   signUpForm: FormGroup;
+  logInForm: FormGroup;
 
-  login_userName: string = "";
-  login_password: string = "";
+  login_userEmail: string = "";
+  login_userPassword: string = "";
 
   page: boolean[] = [true, false, false, false, false, false];
   page_login: boolean = false;
 
   account_create_success: boolean = false;
+  login_error: boolean = false;
+  login_success: boolean = false;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+
+    this.logInForm = new FormGroup({
+      login_email: new FormControl(this.login_userEmail, [
+        Validators.required,
+        Validators.email
+      ]),
+      login_password: new FormControl(this.login_userPassword, [
+        Validators.required
+      ])
+    });
+
     this.signUpForm = new FormGroup({
       //page1
       first_name: new FormControl(this.user.first_name, [
@@ -88,6 +102,21 @@ export class LogUpDialogComponent implements OnInit {
     });
   }
 
+  onLogin(){    
+    this.userService.logIn(this.login_userEmail, this.login_userPassword).subscribe(
+      data => {
+        if(data!=null){
+          localStorage.setItem("logInStatus","true");
+          localStorage.setItem("logInUser",data.first_name);
+          this.page_login = false;
+          this.login_success = true;
+        }else{
+            this.login_error = true;
+        }
+      }
+    );
+  }
+
   get first_name() { return this.signUpForm.get('first_name'); }
   get middle_name() { return this.signUpForm.get('middle_name'); }
   get last_name() { return this.signUpForm.get('last_name'); }
@@ -99,6 +128,9 @@ export class LogUpDialogComponent implements OnInit {
   get email() { return this.signUpForm.get('email'); }
   get cont_number() { return this.signUpForm.get('cont_number'); }
   get password() { return this.signUpForm.get('password'); }
+
+  get login_email() { return this.logInForm.get('login_email'); }
+  get login_password() { return this.logInForm.get('login_password'); }
 
   traverse(index: number, direction: number){
     this.page[index] = false;

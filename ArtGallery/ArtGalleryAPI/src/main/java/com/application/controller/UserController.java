@@ -2,6 +2,7 @@ package com.application.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class UserController {
 	public User logIn(@RequestParam(name="userEmail") String userEmail,
 					  @RequestParam(name="userPassword") String userPassword,
 					  HttpSession session) {
+		try {
 		User user = userService.getUserByEmail(userEmail);
 		if(user!=null) {
 			if(user.getPassword().equals(userPassword)) {
@@ -37,6 +39,25 @@ public class UserController {
 			}
 		}else {
 			return null;
+		}
+		}catch(Exception e) {
+			System.out.println("Exception in logIn: " + e);
+			return null;
+		}
+	}
+	
+	@RequestMapping(value = "/logOut", method = RequestMethod.POST)
+	public boolean logOut(HttpServletRequest request) {
+		try {
+			System.out.println("Logging out user: " + 
+								request.getSession(false).getAttribute("userName") + 
+								" id: " +
+								request.getSession(false).getAttribute("userId"));
+			request.getSession(false).invalidate();
+			return true;
+		}catch(Exception e) {
+			System.out.println("Exception in logOut: " + e);
+			return false;
 		}
 	}
 	

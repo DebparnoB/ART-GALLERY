@@ -3,13 +3,48 @@
         <button (click)="page[0]=false; page_login=true" class="log-up-button" style="top: 121px;">Login</button>
         <button (click)="traverse(0,1)" class="log-up-button" style="top: 221px;">Sign-up</button>
     </div>
-
-
+    
     <div *ngIf="page_login">
-        <input type="input" class="form-control" [(ngModel)]="login_userName" placeholder="User Name" required style="position: absolute; left: 20%; top: 20%;"/>
-        <input type="password" class="form-control"[(ngModel)]="login_password" placeholder="Password" required style="position: absolute; left: 20%; top: 40%;"/>
-        <button class="log-up-button" style="top: 55%;">Log-in</button>
-        <button (click)="page[0]=true; page_login=false" class="nav-button" style="position: absolute; left: 40%; top: 80%;">< Back</button>
+      <form [formGroup]="logInForm" #formDir="ngForm">
+        <div class="form-field"  style="margin-top: 15%">
+          <label for="login_email" class="form-label">*Email</label>
+          <input id="login_email" class="form-control" [(ngModel)]="login_userEmail"
+                formControlName="login_email" required autocomplete="off">
+        <!--Email-Validation-->
+          <div *ngIf="login_email.invalid && (login_email.dirty || login_email.touched)"
+              class="alert alert-danger">
+
+              <div *ngIf="login_email.errors.required" class="validation_text">
+                Email is required.
+              </div>
+              <div *ngIf="login_email.errors.email" class="validation_text">
+                Doesn't match email format
+              </div>
+          </div>          
+        </div>
+        <div class="form-field">
+          <label for="login_password" class="form-label">*Password</label>
+          <input type="password" id="login_password" class="form-control" [(ngModel)]="login_userPassword"
+                formControlName="login_password" required autocomplete="off">
+          <!--Password-Validation-->
+          <div *ngIf="login_password.invalid && (login_password.dirty || login_password.touched)"
+              class="alert alert-danger">
+
+              <div *ngIf="login_password.errors.required" class="validation_text">
+                Password is required.
+              </div>
+          </div>          
+        </div>
+        <button class="side-button" (click)="onLogin()" [disabled]="logInForm.invalid" style="position: absolute; left: 37%; top: 60%">Log-in</button>
+        <div *ngIf="login_error" class="validation_text" style="position: absolute; left: 33%; top: 73%">
+          Email or Password doesn't match
+        </div>
+        <button (click)="page[0]=true; page_login=false" class="back-button" style="left: 40%;">< Back</button>
+      </form>   
+    </div>
+
+    <div *ngIf="login_success">      
+      <div style="position: absolute; left: 35%; top: 45%;">Login Successful</div>
     </div>
 
     <!--sign up form-->
@@ -256,7 +291,7 @@
         <input type="password" id="password" class="form-control" [(ngModel)]="user.password"
               formControlName="password" required autocomplete="off"  style="position: absolute; left: 20%; top: 20%;">
         <input type="input" class="form-control" placeholder="Confirm password" required style="position: absolute; left: 20%; top: 40%;"/>    
-        <button  class="side-button" (click)="onSubmit(); traverse(4,1)" style="position: absolute; left:38%; top:60%">Submit</button>      
+        <button  class="side-button" (click)="onSubmit(); traverse(4,1)" style="position: absolute; left:38%; top:60%" [disabled]="signUpForm.invalid">Submit</button>      
         <button (click)="traverse(4,-1)" class="back-button" style="left: 40%;">< Back</button>
     </div>
 
