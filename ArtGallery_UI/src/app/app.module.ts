@@ -13,6 +13,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForbiddenValidatorDirective } from './log-up-dialog/forbidden-name.directive';
 import { UserService } from './user.service';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { MomentModule } from 'angular2-moment';
+import { ModalModule } from './_modal';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +33,10 @@ import { UserService } from './user.service';
     HttpClientModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MomentModule,
+    ModalModule,
+    NgIdleKeepaliveModule.forRoot(),    
   ],
   providers: [
     ProductServiceService,
