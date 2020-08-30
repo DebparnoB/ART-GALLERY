@@ -46,7 +46,7 @@ export class HomepageComponent implements OnInit {
         this.reset();
       });
 
-      idle.onTimeout.subscribe(() => {
+      idle.onTimeout.subscribe(() => { 
         this.closeModal('session_timeout_dialog');
         this.idleState = 'Timed out!';
         this.timedOut = true;
