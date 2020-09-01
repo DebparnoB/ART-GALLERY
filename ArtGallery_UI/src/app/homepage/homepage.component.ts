@@ -7,6 +7,7 @@ import { UserService } from '../user.service';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { ModalService } from '../_modal'
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-homepage',
@@ -19,6 +20,7 @@ export class HomepageComponent implements OnInit {
   loginID: number;
   loginUser: string;
   bodyText: string = "hello";
+  checkedonce: boolean = false;
 
   idleState = 'Not started.';
   timedOut = false;
@@ -32,7 +34,8 @@ export class HomepageComponent implements OnInit {
               private userService: UserService,
               private idle: Idle, 
               private keepalive: Keepalive,
-              private modalService: ModalService) {  
+              private modalService: ModalService,
+              private eventEmitterService: EventEmitterService) {  
 
       idle.setIdle(300);
       // sets a timeout period of 5 seconds. after 10 seconds of inactivity, the user will be considered timed out.
@@ -76,16 +79,19 @@ export class HomepageComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    if(JSON.parse(localStorage.getItem("logInStatus"))){
-      this.idle.watch()
-      this.timedOut = false;
-    }else{
-      this.idle.stop();
-    }
+    this.startingIdleWatch();
 
     this.productService.getAllProducts().subscribe(data => {
       this.products = data;
-    });         
+    });   
+    
+    if(this.eventEmitterService.subsVar==undefined){
+      this.eventEmitterService.subsVar = this.eventEmitterService
+      .invokeHomePageIdleWatch.subscribe(() => {
+        this.startingIdleWatch();
+      });
+    }
+    
   }
 
   reset() {
@@ -133,6 +139,15 @@ export class HomepageComponent implements OnInit {
       this.loginUser = localStorage.getItem("logInUser");
     }    
     return this.loginStatus;
+  }
+
+  startingIdleWatch(): void {
+    if(JSON.parse(localStorage.getItem("logInStatus"))){
+      this.idle.watch()
+      this.timedOut = false;
+    }else{
+      this.idle.stop();
+    }
   }
 
 }

@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { forbiddenNameValidator } from './forbidden-name.directive';
 import { User } from '../Classes/user';
 import { UserService } from '../user.service';
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-log-up-dialog',
@@ -28,7 +29,8 @@ export class LogUpDialogComponent implements OnInit {
   login_error: boolean = false;
   login_success: boolean = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, 
+              private eventEmitterService: EventEmitterService) { }
 
   ngOnInit(): void {
 
@@ -98,6 +100,7 @@ export class LogUpDialogComponent implements OnInit {
         localStorage.setItem("logInStatus","true");
         localStorage.setItem("logInUser",data.first_name);
         this.account_create_success = true;
+        this.startHomePageIdleWatch();
       }
     });
   }
@@ -110,6 +113,7 @@ export class LogUpDialogComponent implements OnInit {
           localStorage.setItem("logInUser",data.first_name);
           this.page_login = false;
           this.login_success = true;
+          this.startHomePageIdleWatch();
         }else{
             this.login_error = true;
         }
@@ -135,6 +139,10 @@ export class LogUpDialogComponent implements OnInit {
   traverse(index: number, direction: number){
     this.page[index] = false;
     this.page[index + direction] = true;
+  }
+
+  startHomePageIdleWatch(){
+    this.eventEmitterService.onHomePageIdleWatch();
   }
 
 }

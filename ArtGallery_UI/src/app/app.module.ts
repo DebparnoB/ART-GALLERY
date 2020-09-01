@@ -16,6 +16,7 @@ import { UserService } from './user.service';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
 import { ModalModule } from './_modal';
+import { EventEmitterService } from './event-emitter.service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ModalModule } from './_modal';
   ],
   providers: [
     ProductServiceService,
-    UserService
+    UserService,
+    EventEmitterService
   ],
   bootstrap: [AppComponent],
   entryComponents: [LogUpDialogComponent],

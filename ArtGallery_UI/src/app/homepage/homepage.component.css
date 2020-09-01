@@ -51,6 +51,91 @@
     box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
 }
 
+#session_timeout__{
+    position: absolute;
+    width: 317px;
+    height: 164px;
+    left: 562px;
+    top: 203px;
+
+    background: #88E6D5;
+    opacity: 0.74;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.12);
+}
+
+#timeout_comment{
+    position: absolute;
+    width: 273px;
+    height: 24px;
+    left: 20px;
+    top: 20px;
+
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+
+    color: #000000;
+}
+
+#timeout_countdown{
+    position: absolute;
+    width: 259px;
+    height: 24px;
+    left: 29px;
+    top: 64px;
+
+    font-family: Questrial;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 16px;
+
+    color: #000000;
+}
+
+#timeout_logout{
+    position: absolute;
+    width: 67px;
+    height: 23px;
+    left: 74px;
+    top: 123px;
+
+    border: none;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+#timeout_stay{
+    position: absolute;
+    width: 67px;
+    height: 23px;
+    left: 172px;
+    top: 123px;
+
+    border: none;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+#timeout_close{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 300px;
+    top: 0px;
+
+    text-align: center;
+    font-size: 16px;
+    color: #FFFFFF;
+    padding: 0%;
+    margin: 0%;
+
+    border: none;
+    background: #51CAB5;
+}
+
 .menu_text{
     margin-left: 20px;
     font-family: Questrial;
@@ -77,4 +162,6 @@
 
     background: #208AED;
 }
+
+
 
